@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import "./List.css";
 import TodoItem from "./TodoItem";
 import { useState } from "react";
-const List = ({todos}) => {
+const List = ({todos, onUpdate}) => {
     const [search, setSearch] = useState("");
     const onChangeSearch = (e) => {
         setSearch(e.target.value);
@@ -25,7 +25,7 @@ const List = ({todos}) => {
             
             {
                 getFilterData(todos)?.map((todo) => {
-                    return <TodoItem key={todo.id} todo = {todo}/>;
+                    return <TodoItem key={todo.id} todo = {todo} onUpdate = {onUpdate}/>;
                 })
             }
         </div>
