@@ -1,7 +1,10 @@
 import "./TodoItem.css";
-const TodoItem = ({todo, onUpdate}) => {
+const TodoItem = ({todo, onUpdate, onDelete}) => {
     const onChangeCheckbox = () => {
         onUpdate(todo.id);
+    }
+    const onDeleteButton = () => {
+        onDelete(todo.id);
     }
     return (
         <div className="TodoItem">
@@ -13,7 +16,7 @@ const TodoItem = ({todo, onUpdate}) => {
             />
             <div className="content">{todo.content}</div>
             <div className="date">{new Date(todo.date).toDateString()}</div>
-            <button>삭제</button>
+            <button onClick={onDeleteButton}>삭제</button>
         </div>
     )
 }

@@ -42,11 +42,14 @@ function App() {
       )     
     );
   }
+  const onDelete = (targetId) => {
+    setTodos(todos.filter((todo) => targetId !== todo.id));
+  }
   return (
     <div className='App'>
       <Header/>
       <Editor onCreate = {onCreate}/>
-      <List todos = {todos} onUpdate = {onUpdate}/>
+      <List todos = {todos} onUpdate = {onUpdate} onDelete = {onDelete}/>
     </div>
   )
 }
