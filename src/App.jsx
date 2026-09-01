@@ -1,5 +1,5 @@
 import './App.css'
-import { useState, useRef, useReducer } from 'react'
+import { useState, useRef, useReducer, useCallback } from 'react'
 import Header from './components/Header'
 import Editor from './components/Editor'
 import List from './components/List'
@@ -33,10 +33,12 @@ function reducer(state, action){
       return state.filter(item => item.id !== action.data);
   }
 }
+
+
 function App() {
   const [todos, dispatch] = useReducer(reducer, mockData);
   const id = useRef(3);
-  const onCreate = (content) => {
+  const onCreate = useCallback((content)=>{
     dispatch({
       type: "CREATE",
       data: {
@@ -46,19 +48,21 @@ function App() {
         date : new Date().getTime()
       }
     })
-  }
-  const onUpdate = (targetId) => {
+  },[])
+
+  const onUpdate= useCallback((targetId)=>{
     dispatch({
-      type: "UPDATE",
-      data: targetId    
-  });
-  }
-  const onDelete = (targetId) => {
+        type: "UPDATE",
+        data: targetId
+      })
+  },[])
+
+  const onDelete = useCallback((targetId)=>{
     dispatch({
-      type: "DELETE",
-      data: targetId
-    })
-  }
+        type: "DELETE",
+        data: targetId
+      })
+  },[])
   return (
     <div className='App'>
       <Header/>
